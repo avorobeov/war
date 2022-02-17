@@ -133,6 +133,7 @@ namespace war
             while (isValidValue == false)
             {
                 SetCharacteristicsSoldiers();
+
                 if (_maxArmor <= _maximumAmountArmor && _deviationPercentage <= _maximumPercentageValue)
                 {
                     isValidValue = true;
@@ -201,9 +202,7 @@ namespace war
         private int GetNumber(string text)
         {
             string inputUser;
-
             int meaning = 0;
-
             bool isCorrect = false;
 
             while (isCorrect == false)

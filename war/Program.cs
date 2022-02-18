@@ -86,7 +86,7 @@ namespace war
         private int _maxDamage;
         private int _deviationPercentage;
 
-        public int NumberIivingSoldiers => _soldiers.Count;
+        public int CoutIivingSoldiers => _soldiers.Count;
 
         public int NumberSoldiers { get; private set; }
 
@@ -98,7 +98,7 @@ namespace war
             {
                 int health, armor, damage;
 
-                GetCharacteristicsSoldier(out health, out armor, out damage);
+                SetCharacteristicsSoldier(out health, out armor, out damage);
 
                 _soldiers.Add(new Soldier(health, armor, damage));
 
@@ -157,7 +157,7 @@ namespace war
             }
         }
 
-        private void GetCharacteristicsSoldier(out int health, out int armor, out int damage)
+        private void SetCharacteristicsSoldier(out int health, out int armor, out int damage)
         {
             int getPercentages = 100;
             bool isIncrease = Convert.ToBoolean(_random.Next(0, 2));
@@ -233,23 +233,23 @@ namespace war
             int takesDamage;
             int amountDamage;
 
-            if (squad1.NumberIivingSoldiers > 0 && squad2.NumberIivingSoldiers > 0)
+            if (squad1.CoutIivingSoldiers > 0 && squad2.CoutIivingSoldiers > 0)
             {
                 ShowMessage("Бой начался", ConsoleColor.Green);
 
-                while (squad1.NumberIivingSoldiers > 0 && squad2.NumberIivingSoldiers > 0)
+                while (squad1.CoutIivingSoldiers > 0 && squad2.CoutIivingSoldiers > 0)
                 {
-                    for (int i = 0; i < squad1.NumberIivingSoldiers; i++)
+                    for (int i = 0; i < squad1.CoutIivingSoldiers; i++)
                     {
-                        takesDamage = _random.Next(0, squad2.NumberIivingSoldiers);
+                        takesDamage = _random.Next(0, squad2.CoutIivingSoldiers);
                         amountDamage = squad1.GetDamage(i);
 
                         squad2.TakeDamage(takesDamage, amountDamage);
                     }
 
-                    for (int i = 0; i < squad2.NumberIivingSoldiers; i++)
+                    for (int i = 0; i < squad2.CoutIivingSoldiers; i++)
                     {
-                        takesDamage = _random.Next(0, squad1.NumberIivingSoldiers);
+                        takesDamage = _random.Next(0, squad1.CoutIivingSoldiers);
                         amountDamage = squad2.GetDamage(i);
 
                         squad1.TakeDamage(takesDamage, amountDamage);
@@ -266,15 +266,15 @@ namespace war
 
         private void DetermineWinner(Squad squad1, Squad squad2)
         {
-            if (squad1.NumberIivingSoldiers > 0 && squad2.NumberIivingSoldiers > 0)
+            if (squad1.CoutIivingSoldiers > 0 && squad2.CoutIivingSoldiers > 0)
             {
                 ShowMessage("Оба отряда погибли в этом бою", ConsoleColor.DarkYellow);
             }
-            else if (squad1.NumberIivingSoldiers > 0)
+            else if (squad1.CoutIivingSoldiers > 0)
             {
                 ShowMessage("Первый отряд победил", ConsoleColor.DarkGreen);
             }
-            else if (squad2.NumberIivingSoldiers > 0)
+            else if (squad2.CoutIivingSoldiers > 0)
             {
                 ShowMessage("Второй отряд победил", ConsoleColor.DarkBlue);
             }

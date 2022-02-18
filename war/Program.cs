@@ -52,14 +52,12 @@ namespace war
 
     class Soldier
     {
-        public string Name { get; private set; }
         public int Health { get; private set; }
         public int Armor { get; private set; }
         public int Damage { get; private set; }
 
-        public Soldier(string name, int health, int armor, int damage)
+        public Soldier(int health, int armor, int damage)
         {
-            Name = name;
             Health = health;
             Armor = armor;
             Damage = damage;
@@ -102,7 +100,7 @@ namespace war
 
                 GetCharacteristicsSoldier(out health, out armor, out damage);
 
-                _soldiers.Add(new Soldier(i.ToString(), health, armor, damage));
+                _soldiers.Add(new Soldier(health, armor, damage));
 
                 ShowMessage($"Солдат создан и у него вот такие показатели Xp{health} Ar{armor} Dm{damage}",ConsoleColor.Blue);
             }
@@ -110,7 +108,7 @@ namespace war
             ShowMessage($"Отряд создан!\nВ отряде {NumberSoldiers} количество бойцов", ConsoleColor.Green) ;
         }
 
-        public void InflictDamageSoldier(int indexSoldier,int damage)
+        public void TakeDamage(int indexSoldier,int damage)
         {
             if(indexSoldier <= _soldiers.Count && indexSoldier >= 0 && _soldiers.Count != 0)
             {
@@ -120,7 +118,7 @@ namespace war
             }
         }
 
-        public int GetDamageSoldier(int indexSoldier)
+        public int GetDamage(int indexSoldier)
         {
             return _soldiers[indexSoldier].Damage;
         }
@@ -244,17 +242,17 @@ namespace war
                     for (int i = 0; i < squad1.NumberIivingSoldiers; i++)
                     {
                         takesDamage = _random.Next(0, squad2.NumberIivingSoldiers);
-                        amountDamage = squad1.GetDamageSoldier(i);
+                        amountDamage = squad1.GetDamage(i);
 
-                        squad2.InflictDamageSoldier(takesDamage, amountDamage);
+                        squad2.TakeDamage(takesDamage, amountDamage);
                     }
 
                     for (int i = 0; i < squad2.NumberIivingSoldiers; i++)
                     {
                         takesDamage = _random.Next(0, squad1.NumberIivingSoldiers);
-                        amountDamage = squad2.GetDamageSoldier(i);
+                        amountDamage = squad2.GetDamage(i);
 
-                        squad1.InflictDamageSoldier(takesDamage, amountDamage);
+                        squad1.TakeDamage(takesDamage, amountDamage);
                     }
                 }
 
